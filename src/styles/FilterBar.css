@@ -1,0 +1,29 @@
+.filter-container {
+  display: flex;          /* Use flexbox for layout */
+  justify-content: center; /* Center the input horizontally */
+  margin: 20px auto;    /* Add top/bottom margin, center horizontally */
+  width: 80%;           /* Optional - adjust as needed */
+}
+
+.filter-input {
+  margin: 0 10px;  /* Add 10px margin on left and right of each input */
+  padding: 12px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background-color: #333;
+  color: #fff;
+  width: 100%; 
+  box-sizing: border-box;
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: #663399; /* Purple on focus */
+  box-shadow: 0 0 5px #663399;
+}
+
+.filter-input::placeholder {
+  color: #aaa; /* Lighter placeholder text */
+}

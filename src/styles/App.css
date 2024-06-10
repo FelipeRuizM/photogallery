@@ -1,0 +1,12 @@
+/* App.css */
+body {
+  font-family: 'Montserrat', sans-serif; /* Set the primary font family */
+  line-height: 1.6;  /* Set a comfortable default line height */
+  color: #fff;      /* Set the text color (adjust for your color scheme) */
+  background-color: #111;
+}
+
+/* Customize font weights for different elements */
+h1, h2, h3 {
+  font-weight: 700;  /* Bold for headings */
+}
