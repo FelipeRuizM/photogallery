@@ -1,17 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/PhotoForm.css';
 
-function PhotoForm({ onSubmit, initialPhoto }) {
-	const [title, setTitle] = useState(initialPhoto?.title || '');
-	const [url, setUrl] = useState(initialPhoto?.url || '');
-	const [tags, setTags] = useState(initialPhoto?.tags?.join(', ') || '');
+function PhotoForm({ onSubmit, editingPhoto }) {
+	const [title, setTitle] = useState('');
+	const [url, setUrl] = useState('');
+	const [tags, setTags] = useState('');
 
-	const handleSubmit = (e) => {
+	useEffect(() => {
+		setTitle(editingPhoto?.title || '');
+		setUrl(editingPhoto?.url || '');
+		setTags(editingPhoto?.tags?.join(', ') || '');
+  }, [editingPhoto]);
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		onSubmit({ title, url, tags, _id: initialPhoto?._id });
-		setTitle('');
-		setUrl('');
-		setTags('');
+    const tagsArray = tags.split(',').map(tag => tag.trim());
+
+    const photoObject = {
+      title,
+      url,
+      tags: tagsArray, // Send tags as an array
+      _id: editingPhoto?._id
+    };
+
+    const success = await onSubmit(photoObject);
+    if (success) {
+      // Reset the form only when adding (not editing)
+      setTitle('');
+      setUrl('');
+      setTags('');
+    }
 	};
 
 	return (
@@ -48,7 +66,7 @@ function PhotoForm({ onSubmit, initialPhoto }) {
 					/>
 				</div>
 				<button type="submit" className="submit-button">
-					{initialPhoto ? 'Update Photo' : 'Add Photo'}
+					{editingPhoto ? 'Update Photo' : 'Add Photo'}
 				</button>
 			</form>
 		</div>
